@@ -1,0 +1,82 @@
+body {
+    background-image: url('wood.jpg');
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.player-container {
+    width: 300px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.status-bar {
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.controls button {
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls button:hover {
+    background-color: #45a049;
+}
+
+.status-bar {
+    font-size: 18px;
+    color: #ccc;
+    margin: 10px 0;
+}
+
+.player {
+    width: 100%;
+    height: 5px;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+button#play-pause-btn {
+    width: 60px;
+    height: 60px;
+}
+
+button#previous-btn {
+    font-size: 25px;
+}
+
+button#next-btn {
+    font-size: 25px;
+}
+
+
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio4U</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="player-container">
+    <h1>Radio4U</h1>
+    <div class="status-bar">
+        Станція: <span id="current-station">Немає станції</span>
+    </div>
+    <div class="controls">
+        <button id="previous-btn" onclick="previousStation()">&#10094;&#124;</button> <!-- Лівий палець з частиною трикутника -->
+        <button id="play-pause-btn" onclick="playPause()">&#9654;</button> <!-- Трикутник для відтворення -->
+        <button id="next-btn" onclick="nextStation()">&#124;&#10095;</button> <!-- Правий палець з частиною трикутника -->
+    </div>
+    <div class="player">
+        <div id="progress-bar"></div>
+    </div>
+</div>
+
+<script>
+    const stations = [
+        { name: "Пятниця", url: "https://cast.mediaonline.net.ua/radiopyatnica" },
+        { name: "Ур-1", url: "http://91.218.213.49:8000/ur1-mp3" },
+        { name: "Радіо Джаз", url: "https://online.radiojazz.ua/RadioJazz_HD" }
+    ];
+
+    let currentStationIndex = 0;
+    let audio = new Audio(stations[currentStationIndex].url);
+    let isPlaying = false;
+
+    function playPause() {
+        if (isPlaying) {
+            audio.pause();
+            updatePlayPauseButton('&#9654;'); // Трикутник для паузи
+        } else {
+            audio.play();
+            updatePlayPauseButton('&#10074;&#10074;'); // Два вертикальні палички для відтворення
+        }
+        isPlaying = !isPlaying;
+        updateStatusBar();
+    }
+
+    function previousStation() {
+        currentStationIndex = (currentStationIndex - 1 + stations.length) % stations.length;
+        changeStation();
+    }
+
+    function nextStation() {
+        currentStationIndex = (currentStationIndex + 1) % stations.length;
+        changeStation();
+    }
+
+    function changeStation() {
+        audio.src = stations[currentStationIndex].url;
+        audio.play();
+        isPlaying = true;
+        updateStatusBar();
+        updatePlayPauseButton('&#10074;&#10074;'); // Два вертикальні палички для відтворення
+    }
+
+    function updateStatusBar() {
+        document.getElementById('current-station').textContent = stations[currentStationIndex].name;
+    }
+
+    function updatePlayPauseButton(symbol) {
+        document.getElementById('play-pause-btn').innerHTML = symbol;
+    }
+
+    audio.addEventListener('timeupdate', function () {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
+    changeStation();
+</script>
+
+</body>
+</html>
+
+
+
+
+
